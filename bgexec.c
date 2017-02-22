@@ -1,3 +1,14 @@
+/* This program is very useful for loading GUI applications from the command line. */
+/* Running it normally makes the terminal unusable until it quits, which may be unwanted. */
+/* Running it with '&' works, but error messages, etc. may be printed at inopportune times. */
+/* Running it with bgexec runs it in the background with stdout/stderr silenced. */
+/* If stdout and/or stderr are redirected to a non-TTY, it will not be silenced. */
+/* Yes, I know this could be easily done as a shell function. I felt like doing it in C though. :) */
+
+/* Example: 'bgexec gedit file.txt' */
+
+/* Tip: add 'complete -F _command bgexec' to your .bashrc */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
