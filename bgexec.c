@@ -14,6 +14,8 @@
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
+#include <termios.h>
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +36,12 @@ int main(int argc, char *argv[])
 	} else if (pid == 0) {
 		/* child process */
 		close(pipefd[0]);
+
+		int ttyfd = open("/dev/tty", O_RDONLY | O_CLOEXEC);
+		if (ttyfd >= 0) {
+			ioctl(ttyfd, TIOCNOTTY);
+			close(ttyfd);
+		}
 
 		int errfd;
 		if (errtty)
