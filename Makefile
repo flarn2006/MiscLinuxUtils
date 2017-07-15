@@ -1,7 +1,7 @@
 CC="gcc"
 CPP="g++"
 CFLAGS=-O3
-TARGETS=apply bgexec rlcat seek tell
+TARGETS=apply bgexec faketty rlcat seek tell
 
 all: $(TARGETS)
 clean:
@@ -12,6 +12,9 @@ apply: apply.c
 
 bgexec: bgexec.c
 	$(CC) $(CFLAGS) bgexec.c -o bgexec
+
+faketty: faketty.c
+	$(CC) $(CFLAGS) faketty.c -o faketty
 
 rlcat: rlcat.c
 	$(CC) $(CFLAGS) rlcat.c -lreadline -o rlcat
