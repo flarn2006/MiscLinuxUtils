@@ -55,8 +55,11 @@ int main(int argc, char *argv[])
 			wait(&retval);
 			
 			if (retval == 0) {
-				if (movefile(filename, argv[1]) == -1) {
-					fprintf(stderr, "%s: error moving temporary file: %s\n", argv[0], strerror(errno));
+				int movefile_result = movefile(filename, argv[1]);
+				if (movefile_result < 0) {
+					const char *guilty_filename = (movefile_result == -1) ? filename : argv[1];
+					fprintf(stderr, "%s: %s: %s\n", argv[0], guilty_filename, strerror(errno));
+					unlink(filename);
 					return 1;
 				}
 			} else {
@@ -116,7 +119,7 @@ int movefile(const char *src, const char *dest)
 		}
 		FILE *fpdest = fopen(dest, "w");
 		if (!fpdest) {
-			result = -1;
+			result = -2;
 			goto err_open_fpdest;
 		}
 		while (1) {
@@ -130,7 +133,7 @@ int movefile(const char *src, const char *dest)
 				}
 			} else {
 				if (fputc(ch, fpdest) == EOF) {
-					result = -1;
+					result = -2;
 					goto err_copy;
 				}
 			}
