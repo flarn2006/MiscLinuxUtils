@@ -9,6 +9,7 @@
 
 /* Tip: add 'complete -F _command bgexec' to your .bashrc */
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
