@@ -18,6 +18,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	if (geteuid() != 0) {
+		printf("Warning: you are not running %s as root. This may be necessary for proper functioning.\n", argv[0]);
+	}
+
 	int rawmode = 0;
 	struct termios tios_saved;
 	if (isatty(0)) {
