@@ -1,7 +1,7 @@
 CC="gcc"
 CPP="g++"
 CFLAGS=-O3
-TARGETS=apply bgexec extpath faketty fpoke rlcat seek setns tell
+TARGETS=apply bgexec extpath faketty fpoke rlcat seek setns tell xchg
 
 all: $(TARGETS)
 clean:
@@ -33,3 +33,6 @@ setns: setns.c
 
 tell: tell.c
 	$(CC) $(CFLAGS) tell.c -o tell
+
+xchg: xchg.c
+	$(CC) $(CFLAGS) xchg.c -o xchg
