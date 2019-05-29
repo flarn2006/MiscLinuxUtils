@@ -22,6 +22,9 @@ faketty: faketty.c
 fpoke: fpoke.c
 	$(CC) $(CFLAGS) fpoke.c -o fpoke
 
+not: not.c
+	$(CC) $(CFLAGS) not.c -o not
+
 rlcat: rlcat.c
 	$(CC) $(CFLAGS) rlcat.c -lreadline -o rlcat
 
