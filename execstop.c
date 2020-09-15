@@ -15,7 +15,10 @@ int main(int argc, char *argv[])
     }
 
     pid_t forkpid = fork();
-    if (forkpid) {
+	if (forkpid < 0) {
+		perror("fork");
+		return 254;
+    } else if (forkpid) {
         /* Parent process */
         int wstatus;
         waitpid(forkpid, &wstatus, 0);
