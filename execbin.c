@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <signal.h>
 
 typedef long (*func)(void);
 
@@ -36,6 +37,9 @@ int main(int argc, char* argv[])
 		retval = 254;
 		goto exit_close_file;
 	}
+
+	signal(SIGTRAP, SIG_IGN);
+	raise(SIGTRAP);
 
 	long result;
 #ifdef DONT_CLEAR_RAX
