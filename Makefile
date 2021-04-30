@@ -14,7 +14,7 @@ bgexec: bgexec.c
 	$(CC) $(CFLAGS) bgexec.c -o bgexec
 
 execbin: execbin.c
-	$(CC) $(CFLAGS) execbin.c -o execbin
+	$(CC) $(CFLAGS) -fcf-protection=none execbin.c -o execbin
 
 execstop: execstop.c
 	$(CC) $(CFLAGS) execstop.c -o execstop
